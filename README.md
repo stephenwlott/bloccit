@@ -2,4 +2,5 @@
 Made with my mentor, Colby Aley, at [Bloc](http://bloc.io).
 
 Heroku app name: steve-bloccit
-app link: https://git.heroku.com/steve-bloccit.git
+Git link: https://git.heroku.com/steve-bloccit.git
+Web link: https://steve-bloccit.herokuapp.com
