@@ -53,3 +53,9 @@ group :development do
 end
 
 gem 'bootstrap-sass'
+
+group :development do
+  gem "rails-erd"
+end
+
+gem 'rake', '~> 10.4.2'
