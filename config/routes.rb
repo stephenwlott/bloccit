@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   resources :posts
 
-  get 'about' => 'welcome#about'
+  #get 'about' => 'welcome#about'
+  get 'about' => 'posts#about'
 
-  root to: 'welcome#index'     # added to send you directly to the welcome.index page
+  #root to: 'welcome#index'     # added to send you directly to the welcome.index page
+  root to: 'posts#index'     # added to send you directly to the welcome.index page
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
