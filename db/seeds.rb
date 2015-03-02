@@ -9,15 +9,14 @@
 #end
 #posts = Post.all
 
-if !Post.exists?(title: "Unique Post 1")
-  puts "Unique Post 1 not found"
-  Post.create!(
-    title:  "Unique Post 1",
-    body:   "This is a description for Unique Post 1"
-  )
-else
-  puts "Unique Post 1 exists already"
-end
+if Post.where(title: "Unique Post 1").any? 
+  puts "Unique Post 1 exists already" 
+else puts "Unique Post 1 not found" 
+  Post.create( 
+    title: "Unique Post 1", 
+    body: "This is a description for Unique Post 1" 
+  ) 
+end 
  
 # Create Comments
 #100.times do
