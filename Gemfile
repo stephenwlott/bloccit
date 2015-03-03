@@ -53,6 +53,8 @@ group :development do
   gem 'sqlite3'
 end
 
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.1.1'
 
 gem 'pry-rails'
+
+gem 'devise'
