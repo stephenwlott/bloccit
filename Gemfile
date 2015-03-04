@@ -54,7 +54,6 @@ group :development do
 end
 
 gem 'bootstrap-sass', '~> 3.1.1'
-
 gem 'pry-rails'
-
 gem 'devise'
+gem 'figaro'
