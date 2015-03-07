@@ -1,10 +1,13 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do 
+  #get 'summaries/create'
+  #get 'summaries/show'
 
   devise_for :users
 
   resources :topics do
     resources :posts, except: [:index]
   end
+  resources :summary, except: [:index, :new, :edit, :update, :destroy]
   
   get 'about' => 'welcome#about'
 
