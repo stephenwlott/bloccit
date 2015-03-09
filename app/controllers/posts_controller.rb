@@ -2,7 +2,6 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @topic = Topic.find(params[:topic_id])
-    @summary = Summary
   end
 
   def new
@@ -14,14 +13,14 @@ class PostsController < ApplicationController
   def create
     @topic = Topic.find(params[:topic_id])
     @post = current_user.posts.build(params.require(:post).permit(:title, :body))
-    @summary = current_user.summaries.build(params.require(:summary))
     
     authorize @post
     if @post.save
       flash[:notice] = "Post was saved."
-      redirect_to @post
+      redirect_to @topic
+      #redirect_to @post
     else
-      flash[:error] - "There was an error saving the post. Please try again."
+      flash[:error] = "There was an error saving the post. Please try again."
       render :new
     end
   end
@@ -41,7 +40,7 @@ class PostsController < ApplicationController
       redirect_to @post
     else
       flash[:error] = "There was an error saving the post. Please try again."
-      render :edit
+      render :new
     end
   end
 end

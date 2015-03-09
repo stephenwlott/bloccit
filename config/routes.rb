@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :topics do
     resources :posts, except: [:index]
   end
-  resources :summary, except: [:index, :new, :edit, :update, :destroy]
+  resources :summary, except: [:index, :edit, :update, :destroy]
   
   get 'about' => 'welcome#about'
 
