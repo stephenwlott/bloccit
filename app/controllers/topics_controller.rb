@@ -1,9 +1,27 @@
 class TopicsController < ApplicationController
   def index
-    @topics = Topic.paginate(page: params[:page], per_page: 10)
+    temp1
+    #Topic.temp
+    #@topics = Topic.paginate(page: params[:page], per_page: 10)
+    #@topics = paginate(page: params[:page], per_page: 10)
+    @topics = paginate(params[:page], 10)
     authorize @topics
   end
 
+  def temp1
+    puts "--- TopicsController.temp1 method ---"
+  end
+  
+  def paginate(pg, per_pg)
+    puts "-- TopicsController.paginate --"
+    pag = Hash.new
+    
+    puts "pg=#{pg}, per_pg=#{per_pg}"
+    
+
+    return pag
+  end
+  
   def new
     @topic = Topic.new
     authorize @topic
@@ -12,7 +30,6 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @posts = @topic.posts.paginate(page: params[:page], per_page: 10)
-    #@topics = Topic.paginate(page: params[:page], per_page: 10)
     authorize @topic
   end
 
