@@ -1,25 +1,16 @@
 class TopicsController < ApplicationController
   def index
-    temp1
-    #Topic.temp
-    #@topics = Topic.paginate(page: params[:page], per_page: 10)
-    #@topics = paginate(page: params[:page], per_page: 10)
-    @topics = paginate(params[:page], 10)
+    puts "-- topics_controller.index --"
+    @topics = paginate({1 => 10})
     authorize @topics
   end
-
-  def temp1
-    puts "--- TopicsController.temp1 method ---"
-  end
   
-  def paginate(pg, per_pg)
-    puts "-- TopicsController.paginate --"
-    pag = Hash.new
-    
-    puts "pg=#{pg}, per_pg=#{per_pg}"
-    
-
-    return pag
+  def paginate(page_hash = {})
+    puts "-- topics_controller.page_it --"    
+    puts "----------- page_hash = #{page_hash}"
+    pg, per_pg = page_hash.first
+    puts "----------- pg = #{pg}, per_pg = #{per_pg}"
+    Topic.limit(per_pg).offset((pg - 1)*per_pg)
   end
   
   def new
@@ -59,4 +50,9 @@ class TopicsController < ApplicationController
       render :edit
     end
   end
+  
+  def temp1
+    puts "--- TopicsController.temp1 method ---"
+  end
+
 end

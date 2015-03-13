@@ -7,9 +7,9 @@ class Topic < ActiveRecord::Base
   #  
   #end
   
-  def @temp
-    puts "----- Topic.temp method -----"
-  end
+  #def @temp
+  #  puts "----- Topic.temp method -----"
+  #end
 
   
 end
