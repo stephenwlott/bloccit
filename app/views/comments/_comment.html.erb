@@ -1,0 +1,11 @@
+<% if cmt.body.nil? %>
+  <h4><%= markdown_to_html "comment body is nil" %></h4>
+<% else %>
+  <h4><%= markdown_to_html cmt.body %></h4>
+  <small>
+    <% comment_author = User.where(:id=>cmt.user_id).first %>
+    <%= image_tag(comment_author.avatar.tiny.url) if comment_author.avatar? %>
+    submitted <%= time_ago_in_words(cmt.created_at) %> ago by
+    <%= comment_author.name %>
+  </small>
+<% end %>

@@ -11,7 +11,6 @@
     <ul class="nav nav-tabs">
       <li><%= link_to "Bloccit", root_path %></li>
       <li><%= link_to "About", about_path %></li>
-      
       <div class="pull-right user-info">
         <% if current_user %>
           <%= image_tag(current_user.avatar.tiny.url) if current_user.avatar? %>
@@ -22,9 +21,7 @@
           <%= link_to "Sign Up", new_user_registration_path %>
         <% end %>
       </div>
-      
     </ul>
-    
     <% if flash[:notice] %>
       <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -41,7 +38,6 @@
         <%= flash[:alert] %>
       </div>
     <% end %>
-    
   <%= yield %>
   </div>
 </body>

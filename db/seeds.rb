@@ -42,8 +42,8 @@
  
  # Create Comments
  100.times do
-   Comment.create!(
-     # user: users.sample,   # we have not yet associated Users with Comments
+   Comments.create!(
+     user: users.sample,
      post: posts.sample,
      body: Faker::Lorem.paragraph
    )
@@ -73,7 +73,8 @@
  member = User.new(
    name:     'Member User',
    email:    'member@example.com',
-   password: 'helloworld'
+   password: 'helloworld',
+   role:     'member'
  )
  member.skip_confirmation!
  member.save! 
@@ -81,4 +82,4 @@
  puts "Seed finished"
  puts "#{User.count} users created"
  puts "#{Post.count} posts created"
- puts "#{Comment.count} comments created"
+ puts "#{Comments.count} comments created"
