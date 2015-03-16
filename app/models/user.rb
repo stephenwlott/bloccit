@@ -7,10 +7,15 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
   
    def admin?
-   role == 'admin'
- end
+     role == 'admin'
+   end
  
- def moderator?
-   role == 'moderator'
- end
+   def moderator?
+     role == 'moderator'
+   end
+  
+   def comments
+     puts "-- models.user.comments --" 
+   end
+  
 end
