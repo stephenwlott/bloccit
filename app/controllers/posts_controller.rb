@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  #include Paginater
   def show
     @post = Post.find(params[:id])
     @topic = Topic.find(params[:topic_id])
@@ -45,7 +46,8 @@ class PostsController < ApplicationController
   end
   
   private
-
+   
+  
   def post_params
     params.require(:post).permit(:title, :body)
   end

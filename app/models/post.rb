@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+  extend Paginater
+  
   has_many :comments
   belongs_to :user
   belongs_to :topic
@@ -8,10 +10,5 @@ class Post < ActiveRecord::Base
   validates :body, length: { minimum: 20 }, presence: true
   validates :topic, presence: true
   validates :user, presence: true
-  
-  def paginate(page, per_page)
-    
-  end
-  
   
 end
