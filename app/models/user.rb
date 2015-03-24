@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
    end
   
    def comments
-     puts "-- models.user.comments --" 
+     Comment.all
    end
   
 end

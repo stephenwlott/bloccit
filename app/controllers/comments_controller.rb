@@ -1,24 +1,18 @@
 class CommentsController < ApplicationController
   def create
-    @topic = Topic.find(params[:topic_id])
-    @post =  Post.find(params[:id])
-    #@comments = current_user.comments.build(comment_params)
-    #@comments = Comment.all
-    @comment = Comment.where(:id => params[:id]).first
-    
-    @post.topic = @topic
-    @comments.post = @post
-    
-    if @comments.update_attributes(params.require(:comments).permit(:body))
-      flash[:notice] = "Comment was created."
-      redirect_to @topic
+    @post_id = params[:post_id]
+    @post = Post.find(params[:post_id])
+    @user = current_user
+    @comments = current_user.comments.create(:post_id => @post_id, :user_id => @user.id, :body => comment_params[:body])
+    if @comments.save
+      flash[:notice] = "Comment was saved."
+      redirect_to url_for(:action=>"show", :controller=>"posts", :format=>"26", :id=>@post.id , :topic_id=>@post.topic_id)
     else
-      flash[:error] = "There was an error creating the comment. Please try again."
-      render :create
+      flash[:error] = "There was an error saving the post. Please try again."
+      redirect_to '/topics'
     end
   end
-  
   def comment_params
-    params.require(:comments).permit(:body)
+    params.require(:comment).permit(:body)
   end
 end

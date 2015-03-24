@@ -1,8 +1,6 @@
 class Comment < ActiveRecord::Base
   belongs_to :post
   
-  def user
-    puts "-- models.comment.user --"
-  end
-  
+  validates :body, length: { minimum: 5 }, presence: true
+  validates :user_id, presence: true
 end
