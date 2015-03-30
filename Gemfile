@@ -55,7 +55,7 @@ group :development do
   gem 'better_errors'
 end
 
-gem 'bootstrap-sass', '~> 3.1.1'
+gem 'bootstrap-sass'
 gem 'pry-rails'
 gem 'devise'
 gem 'figaro'

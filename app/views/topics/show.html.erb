@@ -6,13 +6,17 @@
 <% end %>
  
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-12">
     <p class="lead"><%= @topic.description %></p>
-    <% if @posts %>
-      <h4><%= "Posts" %></h4>
+    <% if @posts.count == 1 %>
+      <h4><%= "1 Post" %></h4>
+    <% end %>
+    <% if @posts.count > 1 %>
+      <h4><%= "#{@posts.count} Posts" %></h4>
     <% end %>
     <% @posts.each do |post| %>
       <div class="media">
+        <%= render partial: 'votes/voter', locals: { post: post } %>
         <div class="media-body">
           <h4 class="media-heading">
             <%= link_to (markdown_to_html post.title), [@topic, post] %>

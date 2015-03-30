@@ -1,4 +1,4 @@
-<h4>Add New Comment</h4>
+<h4>Add Comment</h4>
 <%= form_for [@topic, @post, comment] do |f| %>
   <%= f.text_area :body, rows: 1, :value => "", :placeholder => "Enter comment" %>
   <%= f.submit "ok" %>

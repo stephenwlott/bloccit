@@ -1,8 +1,10 @@
 <h5><%= Post %></h5>
-<h1><%= markdown_to_html @post.title %></h1>
-
 <div class="row">
   <div class="col-md-8">
+    <%= render partial: 'votes/voter', locals: { post: @post } %>
+  </div>  
+  <div class="col-md-8">
+    <h1><%= markdown_to_html @post.title %></h1>
     <h4><%= markdown_to_html @post.body %></h4>
     <small>
       <%= image_tag(@post.user.avatar.small.url) if @post.user.avatar? %>
@@ -20,13 +22,24 @@
     <% end %>
   </div>
   
+  <div>
+    <h3><%= pluralize(@post.points, 'point') %></h3>
+    <small>
+      <%= pluralize(@post.up_votes, 'up vote') %>,
+      <%= pluralize(@post.down_votes, 'down vote') %>
+    </small>
+  </div>
+  
   <div class="col-md-8">
     <% this_post_comments = @post.comments %>
-    <% if this_post_comments.count > 0 %>
-      <h5><%= "Comments" %></h5>
+    <% if this_post_comments.count == 1 %>
+      <h5><%= "1 Comment" %></h5>
+    <% end %>
+    <% if this_post_comments.count > 1 %>
+      <h5><%= "#{this_post_comments.count} Comments" %></h5>
     <% end %>
     <% this_post_comments.each do |c| %>
-    <%= render partial: 'comments/comment', locals: {comment: c} %>
+      <%= render partial: 'comments/comment', locals: {comment: c} %>
     <% end %>
   </div>
   
