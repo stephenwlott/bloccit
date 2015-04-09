@@ -8,20 +8,36 @@ describe Comment do
       @user = authenticated_user
       @comment = Comment.new(body: 'My comment', post: @post, user_id: 10000)
     end
- 
-    it "sends an email to users who have favorited the post" do
-      @user.favorites.where(post: @post).create
-      allow( FavoriteMailer )
-        .to receive(:new_comment)
-        .with(@user, @post, @comment)
-        .and_return( double(deliver_now: true) )
-      @comment.save
+    
+    # We don't need to change anything for this condition;
+    # The email_favorites attribute defaults to true
+    context "with user's permission" do
+      it "sends an email to users who have favorited the post" do
+        @user.favorites.where(post: @post).create
+        message = instance_double(ActionMailer::MessageDelivery)
+        allow( FavoriteMailer )
+          .to receive(:new_comment)
+          .with(@user, @post, @comment)
+        .and_return( message )
+        allow( message ).to receive(:deliver)
+        
+        @comment.save
+      end
+      it "does not send emails to users who haven't favorited the post" do
+        expect( FavoriteMailer )
+          .not_to receive(:new_comment)
+        @comment.save
+      end
     end
- 
-    it "does not send emails to users who haven't" do
-      expect( FavoriteMailer )
-        .not_to receive(:new_comment)
-      @comment.save
-    end
+    
+    context "without permission" do 
+      before { @user.update_attribute(:email_favorites, false) }
+      it "does not send emails, even to users who have favorited" do
+        @user.favorites.where(post: @post).create
+        expect( FavoriteMailer )
+          .not_to receive(:new_comment)
+        @comment.save
+      end
+    end    
   end
 end
