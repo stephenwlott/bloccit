@@ -32,9 +32,5 @@ describe "Visiting profiles" do
       expect( page ).to have_content(@post.title)
       expect( page ).to have_content(@comment.body)
     end
-    
-    after do
-      Warden.test_reset!
-    end
   end
 end
