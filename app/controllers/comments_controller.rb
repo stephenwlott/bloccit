@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     @user_id = @user.id
     if @comments.save
       flash[:notice] = "Comment was saved."
-      redirect_to url_for(:action=>"show", :controller=>"posts", :format=>"26", :id=>@post.id , :topic_id=>@post.topic_id)
+      redirect_to [@topic, @post]
     else
       flash[:error] = "There was an error saving the comment. Please try again."
       redirect_to [@topic, @post]
@@ -23,10 +23,13 @@ class CommentsController < ApplicationController
     authorize @comment
     if @comment.destroy
       flash[:notice] = "Comment was removed."
-      redirect_to [@topic, @post]
     else
       flash[:error] = "Comment couldn't be deleted. Try again."
-      redirect_to [@topic, @post]
+    end
+    
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
