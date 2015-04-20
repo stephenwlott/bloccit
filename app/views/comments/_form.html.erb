@@ -1,5 +1,5 @@
 <h4>Add Comment</h4>
-<%= form_for [@post, comment] do |f| %>
-  <%= f.text_area :body, rows: 1, :value => "", :placeholder => "Enter comment" %>
+<%= form_for [@post, @post.comments.build], remote: true do |f| %>
+  <%= f.text_area :body, rows: 4, :value => "", :placeholder => "Enter comment" %>
   <%= f.submit "ok" %>
 <% end %>
